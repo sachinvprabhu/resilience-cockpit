@@ -1,0 +1,61 @@
+### Odata service entry point
+GET http://localhost:4004/service/ResilienceCockpitService
+
+
+### Request to fetch Local Supplier List
+GET http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers
+
+
+### Request to fetch Local Supplier List in ODATA V2
+GET http://localhost:4004/odata/v2/service/ResilienceCockpitService/AlternateSuppliers?$expand=SupplierMaterials
+Authorization: Basic alice:welcome
+
+### Request to fetch Local Supplier List with filtered data
+GET http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers?$filter=CountryCode eq 'IN'
+
+
+### Read specific entity
+GET http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers(ID=12652250-179d-4ea7-b3ff-38ce71a697f3,IsActiveEntity=true)
+Authorization: Basic alice:welcome
+
+### Expantion for Supplier Materials
+GET http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers(ID=12652250-179d-4ea7-b3ff-38ce71a697f3,IsActiveEntity=true)?$expand=SupplierMaterials
+
+
+### Update specific entity, Property
+PATCH http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers(ID=12652250-179d-4ea7-b3ff-38ce71a697f3,IsActiveEntity=true)
+Authorization: Basic alice:welcome
+Content-Type: application/json
+
+{
+    "SupplierRating": 50
+}
+
+
+### Update specific entity, Nested Property
+PATCH http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers(ID=982d1a6e-127b-490b-8db6-a5273f578ae7,IsActiveEntity=true)
+Content-Type: application/json
+
+{
+    "CountryCode": "RU"
+}
+
+
+### Update specific entity, Nested Property
+POST http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers
+Content-Type: application/json
+
+{
+    "SupplierNumber": "SN1105454",
+    "SupplierName": "John Systems",
+    "Address": "Address-1265a 12312asds dasdasd",
+    "SupplierRating": 0,
+    "CountryCode": "IN",
+    "IsActiveEntity": true
+}
+
+
+### Update specific entity, Nested Property
+DELETE http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers(ID=982d1a6e-127b-490b-8db6-a5273f578ae7,IsActiveEntity=true)
+
+
