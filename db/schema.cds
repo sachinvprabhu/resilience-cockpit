@@ -46,5 +46,5 @@ entity AleternativeMaterials : cuid
 {
     OriginalMaterialNumber : String(30);
     PercentageMatch : Integer;
-    AlternativeMaterial : Association to one SupplierMaterials;
+    AlternativeMaterial : Composition of one SupplierMaterials;
 }

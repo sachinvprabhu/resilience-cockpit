@@ -11,14 +11,12 @@ service ResilienceCockpitService
     entity AlternateSuppliers as
         projection on my.AlternateSuppliers
         {
-            *,
-            Country.name as CountryName,
-            Country.code as CountryCode
+            *
         }
-        excluding
-        {
-            Country
-        }
+        // excluding
+        // {
+        //     Country
+        // }
         actions
         {
             function SupplierItemCount
@@ -30,10 +28,18 @@ service ResilienceCockpitService
             (
             )
             returns AlternateSuppliers;
+            action DownVote
+            (
+            )
+            returns AlternateSuppliers;
         };
 
     @cds.redirection.target
-    @odata.draft.enabled
+    entity SupplierMaterials as
+        projection on my.SupplierMaterials;
+
+    
+    @cds.redirection.target
     entity AleternativeMaterials as
         projection on my.AleternativeMaterials;
 

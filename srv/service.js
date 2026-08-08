@@ -11,7 +11,7 @@ let impl = async function(srv123){
 
         for(let i=0; i < data.length; i++){
             console.log(data[i])
-            data[i].SupplierRating /= 10;
+            // data[i].SupplierRating /= 10;
             if(data[i].SupplierRating >=5){
               data[i].SupplierName +=  "- Highly Rated";
             }
@@ -27,8 +27,8 @@ let impl = async function(srv123){
     srv123.after("READ","AlternateSuppliers",injectSupplierRatingInName);
 
     async function countryCodeValidation(req){
-        if(req.data?.CountryCode){
-            let countryCode = req.data.CountryCode;
+        if(req.data?.Country_code){
+            let countryCode = req.data.Country_code;
             let country = await SELECT.one.from("sap.common.Countries")
                             .where({code:countryCode});
             if(!country){
@@ -52,6 +52,19 @@ let impl = async function(srv123){
         let supplierObject = await SELECT.one.from("ResilienceCockpit.AlternateSuppliers").where({ID:supplierID});
 
         supplierObject.SupplierRating += 1;
+        
+        await UPDATE("ResilienceCockpit.AlternateSuppliers").set({SupplierRating:supplierObject.SupplierRating}).where({ID:supplierID});
+        
+        req.notify("Rating Updated");
+
+        return supplierObject;
+    });
+    
+    srv123.on("DownVote","AlternateSuppliers",async function(req){
+        let supplierID = req.params[0].ID;
+        let supplierObject = await SELECT.one.from("ResilienceCockpit.AlternateSuppliers").where({ID:supplierID});
+
+        supplierObject.SupplierRating -= 1;
         
         await UPDATE("ResilienceCockpit.AlternateSuppliers").set({SupplierRating:supplierObject.SupplierRating}).where({ID:supplierID});
         
