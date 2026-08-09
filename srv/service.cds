@@ -47,7 +47,10 @@ service ResilienceCockpitService
     entity A_PurchasingInfoRecord as
         projection on external.A_PurchasingInfoRecord
         {
-            *
+            *,
+            0 as Lat : Decimal(10,8),
+            0 as Lng : Decimal(10,8)
+
         }
         excluding
         {

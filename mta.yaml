@@ -46,9 +46,23 @@ modules:
       - nexussupplierlist.zip
       name: nexussupplierlist
       target-path: app/
+    - artifacts:
+      - nexussuppliergeo.zip
+      name: nexussuppliergeo
+      target-path: app/
 - name: nexussupplierlist
   type: html5
   path: app/supplier-list
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: nexussuppliergeo
+  type: html5
+  path: app/supplier-geo
   build-parameters:
     build-result: dist
     builder: custom

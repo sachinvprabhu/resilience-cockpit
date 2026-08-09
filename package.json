@@ -24,7 +24,8 @@
     "watch-supplier-list": "cds watch --open nexus.supplierlist/index.html?sap-ui-xx-viewCache=false --livereload false",
     "undeploy": "cf undeploy ResilienceCockpit --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-supplier-geo": "cds watch --open nexus.suppliergeo/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "private": true,
   "cds": {

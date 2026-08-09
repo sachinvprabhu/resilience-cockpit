@@ -67,31 +67,30 @@ annotate service.AlternateSuppliers with @(
             Value : Address,
         },
         {
+            $Type : 'UI.DataField',
+            Value : Country.code,
+        },
+        {
             $Type : 'UI.DataFieldForAnnotation',
-            Target : '@UI.DataPoint#SupplierRating1',
+            Target : '@UI.DataPoint#SupplierRating2',
             Label : 'Supplier Rating',
-            @UI.Importance : #Medium,
         },
         {
             $Type : 'UI.DataFieldForActionGroup',
             Actions : [
                 {
                     $Type : 'UI.DataFieldForAction',
-                    Action : 'ResilienceCockpitService.DownVote',
-                    Label : 'DownVote',
-                },
-                {
-                    $Type : 'UI.DataFieldForAction',
                     Action : 'ResilienceCockpitService.UpVote',
                     Label : 'UpVote',
                 },
+                {
+                    $Type : 'UI.DataFieldForAction',
+                    Action : 'ResilienceCockpitService.DownVote',
+                    Label : 'DownVote',
+                },
             ],
-            ID : 'UpdateRating',
-            Label : 'UpdateRating',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : Country.code,
+            ID : 'UpdateRatings',
+            Label : 'Update Ratings',
         },
     ],
     UI.HeaderInfo : {
@@ -112,6 +111,11 @@ annotate service.AlternateSuppliers with @(
         TargetValue : 5,
     },
     UI.DataPoint #SupplierRating1 : {
+        Value : SupplierRating,
+        Visualization : #Rating,
+        TargetValue : 5,
+    },
+    UI.DataPoint #SupplierRating2 : {
         Value : SupplierRating,
         Visualization : #Rating,
         TargetValue : 5,
@@ -203,7 +207,7 @@ annotate service.SupplierMaterials with @(
 );
 annotate service.AlternateSuppliers with {
     Country @(
-        Common.ValueListWithFixedValues : true,
+        Common.ValueListWithFixedValues : false,
         Common.ExternalID : Country.code,
         Common.ValueList : {
             $Type : 'Common.ValueListType',

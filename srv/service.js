@@ -81,7 +81,39 @@ let impl = async function(srv123){
     let S4API = await cds.connect.to("API_INFORECORD_PROCESS_SRV");
 
     srv123.on("READ","A_PurchasingInfoRecord", async function(req){
-        return S4API.read(req.query);
+        // Sanitize Request
+        req.query.SELECT.columns.push({ref:['Supplier']});
+
+
+        return S4API.read(req.query)
+        .then(async data => {
+            // Construct Data
+            if(data.constructor === Array){
+                return Promise.all(data.map(async record => {
+                    let supplier = await SELECT.one
+                        .from("ResilienceCockpit.SupplierLocations")
+                        .where({ Supplier: record.Supplier });
+                    if (supplier) {
+                        record.Lat = supplier.Lat;
+                        record.Lng = supplier.Lng;
+                    }
+                    return record;
+                }))
+            } else if(data.Supplier) {
+                let supplier = await SELECT.one
+                        .from("ResilienceCockpit.SupplierLocations")
+                        .where({ Supplier: data.Supplier });
+                if (supplier) {
+                    data.Lat = supplier.Lat;
+                    data.Lng = supplier.Lng;
+                }
+                return data;
+            } else {
+                return data;
+            }
+
+        });
+
     })
 
 
