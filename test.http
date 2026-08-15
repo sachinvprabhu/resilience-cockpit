@@ -121,3 +121,24 @@ Authorization: Basic alice:welcome
 GET http://localhost:4004/service/ResilienceCockpitService/A_PurchasingInfoRecord(PurchasingInfoRecord='5300000100')?$select=PurchasingInfoRecord,Material,PurchasingInfoRecordDesc
 Authorization: Basic alice:welcome
 
+
+### Data from local service
+GET http://jsondb.dest/ShippingCostPerConsignment
+
+
+### Reload Connectivity Proxy
+GET http://localhost:8887/reload
+
+
+###
+POST http://jsondb.dest/ShippingCostPerConsignment
+Content-Type: application/json
+
+{
+    "SourceCountry": "JP",
+    "cost_value": 4000,
+    "cost_currency_code": "EUR"
+  }
+
+### Data from local service
+GET http://jsondb.dest/ShippingCostPerConsignment?SourceCountry=JP

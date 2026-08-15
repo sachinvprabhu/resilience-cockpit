@@ -92,6 +92,16 @@ annotate service.AlternateSuppliers with @(
             ID : 'UpdateRatings',
             Label : 'Update Ratings',
         },
+        {
+            $Type : 'UI.DataField',
+            Value : ShippingCurrency,
+            Label : 'ShippingCurrency',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : ShippingCost,
+            Label : 'ShippingCost',
+        },
     ],
     UI.HeaderInfo : {
         Title : {

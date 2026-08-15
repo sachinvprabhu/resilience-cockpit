@@ -1,8 +1,21 @@
 let impl = async function(srv123){
+    let ShippingCostAPI = await cds.connect.to("ShippingCostAPI");
+    
     // Simple Event Handler
     srv123
-        .before("READ","AlternateSuppliers",function(req){
-            console.log("Read Triggered!");
+        .after("READ","AlternateSuppliers",async function(data,req){
+            if(data.constructor === Array){
+                for(let supplierindex in data){
+                    let supplier = data[supplierindex];
+                    if(supplier.Country_code || supplier.Country?.code){
+                        let countryCode = supplier.Country_code || supplier.Country.code;
+                        let response = await ShippingCostAPI.get(`/ShippingCostPerConsignment?SourceCountry=${countryCode}`)
+                        supplier.ShippingCurrency = response[0].cost_currency_code;
+                        supplier.ShippingCost = response[0].cost_value;
+                    }
+                }
+            }
+            return data;
         })
     
     let injectSupplierRatingInName = function(data,req){
@@ -24,7 +37,7 @@ let impl = async function(srv123){
     }
 
     
-    srv123.after("READ","AlternateSuppliers",injectSupplierRatingInName);
+    //srv123.after("READ","AlternateSuppliers",injectSupplierRatingInName);
 
     async function countryCodeValidation(req){
         if(req.data?.Country_code){

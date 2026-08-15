@@ -11,7 +11,9 @@ service ResilienceCockpitService
     entity AlternateSuppliers as
         projection on my.AlternateSuppliers
         {
-            *
+            *,
+            0 as ShippingCost : Decimal(10,2),
+            '' as ShippingCurrency : String(3)
         }
         // excluding
         // {
