@@ -1,6 +1,6 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:macros="sap.fe.macros">
 	<VBox id="VBox" core:require="{ handler: 'nexus/supplierlist/ext/fragment/SpecDoc'}">
-		<PDFViewer id="pdfviewer" source="https://ui5.sap.com/test-resources/sap/m/demokit/sample/PDFViewerEmbedded/sample.pdf" isTrustedSource="true" height="30rem">
+		<PDFViewer id="pdfviewer" source="/generate-pdf?id={ID}" isTrustedSource="true" height="30rem">
 			<layoutData>
 				<FlexItemData id="pdfViewerLayout" growFactor="1" />
 			</layoutData>
