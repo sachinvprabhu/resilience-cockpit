@@ -49,13 +49,28 @@
           "alice": {
             "password": "welcome",
             "roles": [
-              "Admin",
-              "authenticated-user"
+              "NX-SC-USER"
             ]
           },
           "bob": {
+            "password": "welcome",
             "roles": [
-              "Viewer"
+              "NX-SC-USER",
+              "NX-SC-ANL"
+            ]
+          },
+          "charlie": {
+            "password": "welcome",
+            "roles": [
+              "NX-SC-USER",
+              "NX-SC-MGR"
+            ]
+          },
+          "david": {
+            "password": "welcome",
+            "roles": [
+              "NX-SC-USER",
+              "NX-PR-ANL"
             ]
           }
         }

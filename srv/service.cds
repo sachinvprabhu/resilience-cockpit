@@ -8,6 +8,11 @@ service ResilienceCockpitService
     @cds.redirection.target
     @odata.draft.bypass
     @odata.draft.enabled
+    @(restrict: [
+        { grant: 'READ' , to: ['NX-SC-ANL', 'NX-PR-ANL']},
+        { grant: ['READ', 'WRITE'] , to: ['NX-SC-MGR']},
+        { grant: ['READ', 'WRITE'] , to: ['NX-PR-ANL'], where: (createdBy = $user) }
+    ])
     entity AlternateSuppliers as
         projection on my.AlternateSuppliers
         {
@@ -62,5 +67,5 @@ service ResilienceCockpitService
 
 annotate ResilienceCockpitService with @requires :
 [
-    'authenticated-user'
+    'NX-SC-USER'
 ];

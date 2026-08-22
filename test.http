@@ -21,16 +21,17 @@ GET http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers(ID
 Authorization: Basic alice:welcome
 
 ### Expantion for Supplier Materials
-GET http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers(ID=12652250-179d-4ea7-b3ff-38ce71a697f3,IsActiveEntity=true)?$expand=SupplierMaterials
+GET http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers(ID=12652249-63ee-4bc8-bd18-96681c90bea2,IsActiveEntity=true)?$expand=SupplierMaterials
+Authorization: Basic david:welcome
 
 
 ### Update specific entity, Property
 PATCH http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers(ID=12652249-63ee-4bc8-bd18-96681c90bea2,IsActiveEntity=true)
-Authorization: Basic alice:welcome
+Authorization: Basic david:welcome
 Content-Type: application/json
 
 {
-    "SupplierRating": 50
+    "Address": "Bangalore, Karnataka, India"
 }
 
 
@@ -46,7 +47,7 @@ Content-Type: application/json
 
 ### Update specific entity, Nested Property
 POST http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers
-Authorization: Basic alice:welcome
+Authorization: Basic david:welcome
 Content-Type: application/json
 
 {
@@ -54,9 +55,14 @@ Content-Type: application/json
     "SupplierName": "John Systems A",
     "Address": "Address-1265a 12312asds dasdasd",
     "SupplierRating": 0,
-    "CountryCode": "IN",
+    "Country_code": "IN",
     "IsActiveEntity": true
 }
+
+###
+GET http://localhost:4004/service/ResilienceCockpitService/AlternateSuppliers
+Authorization: Basic david:welcome
+
 
 
 ### Update specific entity, Nested Property
@@ -142,3 +148,6 @@ Content-Type: application/json
 
 ### Data from local service
 GET http://jsondb.dest/ShippingCostPerConsignment?SourceCountry=JP
+
+
+
