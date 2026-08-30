@@ -10,7 +10,7 @@ service ResilienceCockpitService
     @odata.draft.enabled
     @(restrict: [
         { grant: 'READ' , to: ['NX-SC-ANL', 'NX-PR-ANL']},
-        { grant: ['READ', 'WRITE'] , to: ['NX-SC-MGR']},
+        { grant: ['READ', 'WRITE','UpVote','DownVote'] , to: ['NX-SC-MGR']},
         { grant: ['READ', 'WRITE'] , to: ['NX-PR-ANL'], where: (createdBy = $user) }
     ])
     entity AlternateSuppliers as
@@ -24,6 +24,7 @@ service ResilienceCockpitService
         // {
         //     Country
         // }
+
         actions
         {
             function SupplierItemCount
